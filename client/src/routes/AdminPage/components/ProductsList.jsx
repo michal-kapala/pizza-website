@@ -24,7 +24,7 @@ export default function ProductsList(props) {
     <Container className="text-center mt-5">
       <Row>
         <Card.Title className="fs-5 mb-3">
-          Products list ( from last to first )
+          Products list (from last to first)
         </Card.Title>
         <Form className="mb-2">
           <FormControl

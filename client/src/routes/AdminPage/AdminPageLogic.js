@@ -17,4 +17,19 @@ const useProductsList = () => {
   return { productsList, setProductsList };
 };
 
-export { useProductsList };
+// Read from Orders Collection
+const useOrdersList = () => {
+  const [ordersList, setOrdersList] = useState([]);
+
+  useEffect(() => {
+    Axios.get(`${process.env.REACT_APP_ENDPOINT}/readFromOrdersAdmin`).then(
+      (response) => {
+        setOrdersList(response.data.reverse());
+      }
+    );
+  }, []);
+
+  return { ordersList, setOrdersList };
+};
+
+export { useProductsList, useOrdersList };

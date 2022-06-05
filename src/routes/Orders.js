@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { InsertOrder, GetCarts, GetOrder } = require("../controllers/Orders");
+const { InsertOrder, GetCarts, GetOrder, GetOrders } = require("../controllers/Orders");
 
 // Insert order into Orders Collection
 router.post("/insertIntoOrders", InsertOrder);
@@ -11,5 +11,8 @@ router.get("/getFromOrders/:email", GetCarts);
 
 // Get particular order by id for TrackOrderPage
 router.get("/readFromOrdersById/:id", GetOrder);
+
+// Get all orders for Admin Page
+router.get("/readFromOrdersAdmin", GetOrders);
 
 module.exports = router;

@@ -51,4 +51,16 @@ const GetFromOrdersById = async (id) => {
   }
 };
 
-module.exports = { InsertIntoOrders, GetFromOrders, GetFromOrdersById };
+// Get all available orders for Admin Page
+const GetFromOrdersAdmin = async () => {
+  try {
+    const orders = await OrdersModel.find({}, (err, result) => {
+      return result;
+    });
+    return orders;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = { InsertIntoOrders, GetFromOrders, GetFromOrdersById, GetFromOrdersAdmin };
