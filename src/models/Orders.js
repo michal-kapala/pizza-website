@@ -22,15 +22,15 @@ const OrdersSchema = new mongoose.Schema({
   },
   Address: {
     type: String,
-    require: true,
+    required: true,
   },
   City: {
     type: String,
-    require: true,
+    required: true,
   },
   PhoneNumber: {
     type: Number,
-    require: true,
+    required: true,
   },
   DeliveryTime: {
     type: String,
@@ -39,6 +39,12 @@ const OrdersSchema = new mongoose.Schema({
   DeliveryWay: {
     type: String,
     required: true,
+  },
+  Status: {
+    type: String,
+    required: true,
+    enum: ['New', 'In Progress', 'Delivery', 'Delivered'],
+    default: 'New',
   },
 });
 

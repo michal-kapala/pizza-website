@@ -11,15 +11,15 @@ export default function Cart(props) {
   return (
     <Container fluid className="text-center">
       <Container>
-        {/* Render different if it's past the delivery hours */}
-        {time > "22:29" && time < "8:59" ? (
+        {/* Render different if it's past the delivery hours (originally 22:30 - 9:00)*/}
+        {time > "4:00" && time < "5:00" ? (
           <PastDeliveryHours />
         ) : (
           <CartEmptyOrNot cart={cart} />
         )}
 
         {/* Render only if cart is not empty and is not past delivery hours */}
-        {cart.length === 0 || (time > "22:29" && time < "8:59") ? null : (
+        {cart.length === 0 || (time > "4:00" && time < "5:00") ? null : (
           <>
             <Card className="mt-5 p-3 itemsCenterLT540W">
               {cart.map((value) => {
@@ -124,7 +124,7 @@ const PastDeliveryHours = () => {
     <Card.Subtitle className="text-secondary mt-5">
       <h5>
         We can not take orders at the moment. Please come back daily in our
-        Delivery Times 09:00 - 22:30. Thank you!
+        Delivery Times 05:00 - 4:00. Thank you!
       </h5>
     </Card.Subtitle>
   );

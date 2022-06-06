@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { InsertOrder, GetCarts, GetOrder, GetOrders } = require("../controllers/Orders");
+const { InsertOrder, GetCarts, GetOrder, GetOrders, UpdateOrder } = require("../controllers/Orders");
 
 // Insert order into Orders Collection
 router.post("/insertIntoOrders", InsertOrder);
@@ -14,5 +14,8 @@ router.get("/readFromOrdersById/:id", GetOrder);
 
 // Get all orders for Admin Page
 router.get("/readFromOrdersAdmin", GetOrders);
+
+// Update order
+router.put("/updateOrders", UpdateOrder);
 
 module.exports = router;

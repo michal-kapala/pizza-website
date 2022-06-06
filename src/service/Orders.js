@@ -10,10 +10,11 @@ const InsertIntoOrders = async (cart, userDetails, deliveryDetails) => {
     Email: userDetails.email,
     Address: userDetails.address,
     City: userDetails.city,
-    PhoneNumber: userDetails.phoneNumber,
+    PhoneNumber: userDetails.phoneNo,
 
     DeliveryTime: deliveryDetails.deliveryTime,
     DeliveryWay: deliveryDetails.deliveryWay,
+    Status: 'New'
   });
 
   try {
@@ -61,6 +62,27 @@ const GetFromOrdersAdmin = async () => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
-module.exports = { InsertIntoOrders, GetFromOrders, GetFromOrdersById, GetFromOrdersAdmin };
+// Update order
+const UpdateOrders = async (id, newOrder) => {
+  try {
+    await OrdersModel.findById(id, (err, updatedOrder) => {
+      updatedOrder.Cart = newOrder.cart;
+      updatedOrder.FirstName = newOrder.firstName;
+      updatedOrder.LastName = newOrder.lastName;
+      updatedOrder.Email = newOrder.email;
+      updatedOrder.Address = newOrder.address;
+      updatedOrder.City = newOrder.city;
+      updatedOrder.PhoneNumber = parseFloat(newOrder.phoneNumber);
+      updatedOrder.DeliveryTime = newOrder.deliveryTime;
+      updatedOrder.DeliveryWay = newOrder.deliveryWay;
+      updatedOrder.Status = newOrder.status;
+      updatedOrder.save();
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { InsertIntoOrders, GetFromOrders, GetFromOrdersById, GetFromOrdersAdmin, UpdateOrders };

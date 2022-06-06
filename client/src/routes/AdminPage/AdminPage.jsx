@@ -25,6 +25,13 @@ export default function AdminPage(props) {
   const { productsList, setProductsList } = useProductsList();
   // Read from Orders Collection
   const { ordersList, setOrdersList} = useOrdersList();
+  
+  var times = ordersList.map((e) => {
+    var dateOfOrder = new Date(
+      parseInt(e._id.substring(0, 8), 16) * 1000
+    );
+    return dateOfOrder.toLocaleString("pl-PL");
+  });
 
   return (
     <main className="slide-in-right">
@@ -38,7 +45,7 @@ export default function AdminPage(props) {
           <ProductsList productsList={productsList} />
         </Tab>
         <Tab eventKey="orders" title="Orders" >
-          <OrdersList ordersList={ordersList}/>
+          <OrdersList ordersList={ordersList} times={times}/>
         </Tab>
       </Tabs>
       

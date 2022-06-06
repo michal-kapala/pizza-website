@@ -3,6 +3,7 @@ const {
   GetFromOrders,
   GetFromOrdersById,
   GetFromOrdersAdmin,
+  UpdateOrders,
 } = require("../service/Orders");
 
 const InsertOrder = (req) => {
@@ -35,4 +36,10 @@ const GetOrders = async (req, res) => {
   return res.send(orders);
 };
 
-module.exports = { InsertOrder, GetCarts, GetOrder, GetOrders };
+const UpdateOrder = async(req) => {
+  const newOrder = req.body.newOrder;
+  const id = req.body.id;
+  UpdateOrders(id, newOrder);
+};
+
+module.exports = { InsertOrder, GetCarts, GetOrder, GetOrders, UpdateOrder };
