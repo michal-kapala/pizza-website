@@ -32,7 +32,7 @@ export default function ModalContent(props) {
   // If the Product Category === "pizza", make options for size
   const PizzaSize = () => {
     // This Array is used to set size for pizza and to keep the checked value for the <Form.Check />
-    const values = [{ Mica: "0" }, { Medie: "1" }, { Mare: "2" }];
+    const values = [{ small: "0" }, { medium: "1" }, { large: "2" }];
     return (
       <Form.Group className="mb-3">
         {values.map((e) => {
@@ -62,7 +62,7 @@ export default function ModalContent(props) {
       <Card>
         <Card.Img variant="top" src={`images/${content.Image}.jpg`} />
         <Card.Body>
-          <Card.Title>&#163; {content.Price[size]}</Card.Title>
+          <Card.Title>{content.Price[size]} PLN</Card.Title>
           <Card.Subtitle className="mb-3">{content.Description}</Card.Subtitle>
 
           {/* Render sizes for pizza only if content is pizza and particular pizza has multiple sizes */}
@@ -73,7 +73,7 @@ export default function ModalContent(props) {
             Other info (optional):{" "}
             <FormControl
               onChange={(e) => setSpecifics(e.target.value)}
-              placeholder="Exemple: Hot Ketchup"
+              placeholder="Example: Hot ketchup"
             />
           </Card.Text>
           <Row className="justify-content-center">
@@ -99,7 +99,7 @@ export default function ModalContent(props) {
             <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
               <MyButton
                 className="fontSize"
-                title="Adauga in cos"
+                title="Add to cart"
                 onClick={() =>
                   handleSubmit(
                     onClose,

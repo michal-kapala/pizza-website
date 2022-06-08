@@ -39,7 +39,7 @@ function List(props) {
   <>
     <Card key={val._id} className="m-3 p-3">
       <Card.Title>
-        Order {val._id} - <b>&#163;{totalPrice}</b>
+        Order {val._id} - <b>{totalPrice} PLN</b>
       </Card.Title>
       <Card.Subtitle><b>Ordered: </b>{timeOfOrder[idx]}</Card.Subtitle>
       <Card.Subtitle><b>Delivery: </b>{val.DeliveryWay}, {val.DeliveryTime}</Card.Subtitle>
@@ -51,8 +51,8 @@ function List(props) {
           {val.Cart.map((element) => {
             return (
               <ListGroup.Item className="mb-3" as="li" key={element.Name}>
-                <b>{element.Quantity}x</b> {element.Name} &nbsp;{" "}
-                &#163;{element.Price}
+                <b>{element.Quantity}x</b> {element.Name} {" "}
+                {element.Price} PLN
               </ListGroup.Item>
             );
           })}

@@ -34,7 +34,7 @@ const useAddToCart = () => {
 
     if (content.Category === "pizza") {
       // If sizeName is the default, it will not get its id because the event is onChange and nothing changed. In that case, I need to make sure if the sizeName is default, to get its name
-      if (sizeName === "") sizeName = "Mica";
+      if (sizeName === "") sizeName = "small";
       // If sizeName is specified, add it to the name
       name += ` (${sizeName})`;
     }

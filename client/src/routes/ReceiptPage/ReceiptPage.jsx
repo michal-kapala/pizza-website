@@ -36,12 +36,12 @@ export default function ReceiptPage(props) {
         <SuccessMessage />
         <Details title={"Order details"} cart={lastOrder}>
           <Card.Body>
-            Date: {time.toLocaleString("ro-RO")} <br></br>
+            Date: {time.toLocaleString("pl-PL")} <br></br>
             Date and delivery hour: {timeOfDelivery.toLocaleString(
-              "ro-RO"
+              "pl-PL"
             )}{" "}
             <br></br>
-            Total: <strong>&#163; {totalPrice}</strong>
+            Total: <strong>{totalPrice} PLN</strong>
           </Card.Body>
         </Details>
       </main>

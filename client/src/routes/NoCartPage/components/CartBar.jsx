@@ -39,7 +39,7 @@ export default function CartBar(props) {
             <h4>Your cart</h4>
           </Col>
           <Col className="text-end">
-            <h4>&#163; {totalPrice}</h4>
+            <h4>{totalPrice} PLN</h4>
           </Col>
         </Row>
       </Navbar>

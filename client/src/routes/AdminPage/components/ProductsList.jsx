@@ -57,8 +57,8 @@ const List = (props) => {
         <Card.Title className="fs-4">
           {val.Name} for{" "}
           {val.Price.length === 1
-            ? `${val.Price} £`
-            : `${val.Price[0]}, ${val.Price[1]}, ${val.Price[2]} £`}
+            ? `${val.Price} PLN`
+            : `${val.Price[0]}, ${val.Price[1]}, ${val.Price[2]} PLN`}
         </Card.Title>
 
         <Card.Title>
@@ -103,7 +103,7 @@ const List = (props) => {
 
         <Row className="mt-2 mb-2">
           <Col>
-            <Form.Label>New price for first size</Form.Label>
+            <Form.Label>New price for first size (PLN)</Form.Label>
             <Form.Control
               type="number"
               value={newProduct.price}
@@ -132,7 +132,7 @@ const List = (props) => {
         </Row>
         <Row className="mb-2">
           <Col>
-            <Form.Label>New price for second size</Form.Label>
+            <Form.Label>New price for second size (PLN)</Form.Label>
             <Form.Control
               type="number"
               value={newProduct.price2}
@@ -145,7 +145,7 @@ const List = (props) => {
             />
           </Col>
           <Col>
-            <Form.Label>New price for third size</Form.Label>
+            <Form.Label>New price for third size (PLN)</Form.Label>
             <Form.Control
               type="number"
               value={newProduct.price3}

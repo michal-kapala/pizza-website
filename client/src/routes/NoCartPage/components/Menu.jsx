@@ -20,7 +20,7 @@ export default function Menu(props) {
 
   // Render only if the filteredFoodList is empty
   const NoItemMatch = () => {
-    if (food.pizzas.length === 0)
+    if ((food.pizzas.length + food.burgers.length + food.drinks.length) === 0)
       return (
         <Container style={{ height: "70vh" }} className="mb-5 text-center">
           <Card.Title>Sorry but we don't have that product!</Card.Title>
@@ -57,10 +57,10 @@ export default function Menu(props) {
                 <Nav.Link href="#pizza">Pizza</Nav.Link>
               </Nav>
               <Nav className="rajdhani">
-                <Nav.Link href="#pizza">Burgers</Nav.Link>
+                <Nav.Link href="#burgers">Burgers</Nav.Link>
               </Nav>
               <Nav className="rajdhani">
-                <Nav.Link href="#pizza">Drinks</Nav.Link>
+                <Nav.Link href="#drinks">Drinks</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -74,6 +74,20 @@ export default function Menu(props) {
           title={"Pizza"}
           id={"pizza"}
           mapOver={food.pizzas}
+          setShow={setShow}
+          setContent={setContent}
+        />
+        <Category
+          title={"Burgers"}
+          id={"burgers"}
+          mapOver={food.burgers}
+          setShow={setShow}
+          setContent={setContent}
+        />
+        <Category
+          title={"Drinks"}
+          id={"drinks"}
+          mapOver={food.drinks}
           setShow={setShow}
           setContent={setContent}
         />
@@ -141,7 +155,7 @@ const FoodBox = (props) => {
           <Card.Title>{val.Name} </Card.Title>
           <Card.Subtitle className="mb-2">
             {/* [0] - because Pizza has 3 sizes, first option is the smallest and default for the others with only one option */}
-            &#163; {val.Price[0]}
+            {val.Price[0]} PLN
           </Card.Subtitle>
           <Card.Subtitle style={{ height: "5rem" }} className="mt-2 text-muted">
             {val.Description}
