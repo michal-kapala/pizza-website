@@ -6,7 +6,7 @@ export default function Details(props) {
   const { cart, title } = props;
   return (
     <Container>
-      <Row className="justify-content-center ">
+      <Row className="justify-content-center">
         <Col sm={12} md={10} lg={8} xl={8} xxl={9}>
           <Card className={"m-2 p-2"}>
             <Card.Title className="fs-4">{title}</Card.Title>
@@ -29,8 +29,8 @@ const DetailsRow = (props) => {
   const { value } = props;
   return (
     <ListGroup.Item className="mb-3 " as="li">
-      <strong>{value.Quantity}</strong> x {value.Name}{" "}
-      <strong>{value.Price} PLN</strong> / unit
+      <strong>{value.Quantity}</strong> x {value.Name} -  {" "}
+      <strong>{value.Price * value.Quantity} PLN</strong>
     </ListGroup.Item>
   );
 };

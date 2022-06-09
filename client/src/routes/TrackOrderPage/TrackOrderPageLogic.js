@@ -7,6 +7,7 @@ const useOrderData = (id, setAppState) => {
     order: [],
     address: [],
     loaded: false,
+    status: ""
   });
 
   useEffect(() => {
@@ -22,12 +23,17 @@ const useOrderData = (id, setAppState) => {
         var address = response.data.map((e) => {
           return e.Address + ", " + e.City;
         });
+        // The status
+        var status = response.data.map((e) => {
+          return e.Status;
+        });
 
         // Set states
         setDataOrder({
           ...orderData,
           order: order,
           address: address,
+          status: status,
           loaded: true,
         });
       });

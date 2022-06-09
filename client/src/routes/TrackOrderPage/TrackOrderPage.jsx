@@ -14,27 +14,38 @@ export default function TrackOrderPage(props) {
   // Difference between date of order and current time
   const { minsDiff } = useDate(idOfOrder);
 
-  // Show order status ( minsDeff < 30 = cooking; minsDeff < 50 = delivery; minsDeff > 50 = delivered )
+  // Show order status
   const OrderStatus = () => {
-    if (minsDiff < 30) {
+    if (orderData.status == "New") {
+      return (
+        <>
+          <Card.Title className="fs-2">
+            Your order has just been added.
+          </Card.Title>
+          <Card.Subtitle>
+            Estimated {50 - minsDiff} minutes until delivered.
+          </Card.Subtitle>
+        </>
+      );
+    } else if (orderData.status == "In Progress") {
       return (
         <>
           <Card.Title className="fs-2">
             Your order has been approved and is being prepared.
           </Card.Title>
           <Card.Subtitle>
-            {50 - minsDiff} minutes until delivered.
+            Estimated {50 - minsDiff} minutes until delivered.
           </Card.Subtitle>
         </>
       );
-    } else if (minsDiff < 50) {
+    } else if (orderData.status == "Delivery") {
       return (
         <>
           <Card.Title className="fs-2">
             Your order is being delivered.
           </Card.Title>
           <Card.Subtitle>
-            {50 - minsDiff} minutes until delivered.
+            Estimated {50 - minsDiff} minutes until delivered.
           </Card.Subtitle>
         </>
       );
@@ -63,7 +74,7 @@ export default function TrackOrderPage(props) {
         </Container>
 
         {orderData.order.map((e) => {
-          return <CartBody key={e.Name} e={e} address={orderData.address} />;
+          return <CartBody key={e.Name} e={e} address={orderData.address} status={orderData.status}/>;
         })}
       </main>
     );
@@ -72,7 +83,7 @@ export default function TrackOrderPage(props) {
 
 // Using another component because Total Price could not have been calculated without. Calling custom hooks in return statement is not possible
 const CartBody = (props) => {
-  const { e, address } = props;
+  const { e, address, status } = props;
   return (
     <Container>
       <Details cart={e} title="Order details">
