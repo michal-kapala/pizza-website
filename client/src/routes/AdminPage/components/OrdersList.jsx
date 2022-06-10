@@ -15,7 +15,7 @@ export default function OrdersList(props) {
   // Filter the list with 'Filter by status' dropdown
   const { filteredList, filter, setFilter } = useFilteredOrdersList(ordersList);
   // Status filter button variant theme state
-  const [variant, setVariant] = useState("primary");
+  const [variant, setVariant] = useState(getStatusVariant(filter));
 
   return (
     <Container className="text-center mt-5">
