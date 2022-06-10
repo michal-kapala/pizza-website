@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Container,
   Row,
@@ -7,10 +8,14 @@ import {
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useTotalQuantityOrTotalPrice } from "../../../AppLogic";
-import useUpdateOrder from "./OrdersListLogic";
+import { useFilteredOrdersList, useUpdateOrder, getStatusVariant } from "./OrdersListLogic";
 
 export default function OrdersList(props) {
   const { ordersList, times } = props;
+  // Filter the list with 'Filter by status' dropdown
+  const { filteredList, filter, setFilter } = useFilteredOrdersList(ordersList);
+  // Status filter button variant theme state
+  const [variant, setVariant] = useState("primary");
 
   return (
     <Container className="text-center mt-5">
@@ -18,7 +23,24 @@ export default function OrdersList(props) {
         <Card.Title className="fs-5 mb-3">
           Orders list (from last to first)
         </Card.Title>
-        {ordersList.map((val, idx) => {
+        <DropdownButton id="status-dropdown-filter-button" title={`Status: ${filter}`} variant={variant}>
+          <Dropdown.Item as="button" onClick={() => {setFilter('Any'); setVariant("primary");}}>
+              Any
+          </Dropdown.Item>
+          <Dropdown.Item as="button" onClick={() => {setFilter('New'); setVariant("danger");}}>
+              New
+          </Dropdown.Item>
+          <Dropdown.Item as="button" onClick={() => {setFilter('In Progress'); setVariant("warning");}}>
+              In Progress
+          </Dropdown.Item>
+          <Dropdown.Item as="button" onClick={() => {setFilter('Delivery'); setVariant("info");}}>
+              Delivery
+          </Dropdown.Item>
+          <Dropdown.Item as="button" onClick={() => {setFilter('Delivered'); setVariant("success");}}>
+              Delivered
+          </Dropdown.Item>
+        </DropdownButton>
+        {filteredList.map((val, idx) => {
           // List Component can be found below
           return <List val={val} idx={idx} timeOfOrder={times}/>;
         })}
@@ -28,9 +50,9 @@ export default function OrdersList(props) {
 };
 
 function List(props) {
-  const { val, idx, timeOfOrder } = props;
+  let {val, idx, timeOfOrder } = props;
 
-  // Update Products Collection by id
+  // Update Orders Collection by id
   const { updateOrderStatus, newOrder, setNewOrder } = useUpdateOrder(val);
 
   const { totalPrice } = useTotalQuantityOrTotalPrice(val.Cart);
@@ -58,16 +80,31 @@ function List(props) {
           })}
         </ListGroup>
       </Card.Body>
-      <DropdownButton id="status-dropdown-button" title={newOrder.status}>
+      <DropdownButton id="status-dropdown-button" title={val.Status} variant={getStatusVariant(val.Status)}>
         <Dropdown.Item as="button" 
-          onClick={async () => { setNewOrder({...newOrder, status: 'In Progress'}); updateOrderStatus(val._id, newOrder, 'In Progress')}}>
-            In Progress</Dropdown.Item>
+          onClick={async () => { 
+            setNewOrder({...newOrder, status: 'In Progress'});
+            updateOrderStatus(val._id, newOrder, 'In Progress');
+            val.Status = 'In Progress';
+        }}>
+            In Progress
+        </Dropdown.Item>
         <Dropdown.Item as="button" 
-          onClick={async () => {setNewOrder({...newOrder, status: 'Delivery'}); updateOrderStatus(val._id, newOrder, 'Delivery')}}>
-            Delivery</Dropdown.Item>
+          onClick={async () => {
+            setNewOrder({...newOrder, status: 'Delivery'});
+            updateOrderStatus(val._id, newOrder, 'Delivery');
+            val.Status = 'Delivery';
+        }}>
+            Delivery
+        </Dropdown.Item>
         <Dropdown.Item as="button" 
-          onClick={async () => {setNewOrder({...newOrder, status: 'Delivered'}); updateOrderStatus(val._id, newOrder, 'Delivered')}}>
-            Delivered</Dropdown.Item>
+          onClick={async () => {
+            setNewOrder({...newOrder, status: 'Delivered'});
+            updateOrderStatus(val._id, newOrder, 'Delivered');
+            val.Status = 'Delivered';
+        }}>
+            Delivered
+        </Dropdown.Item>
       </DropdownButton>
     </Card>
   </>

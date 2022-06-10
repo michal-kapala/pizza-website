@@ -1,8 +1,30 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 
+// Filter the orderList by status
+const useFilteredOrdersList = (ordersList) => {
+    // State to hold the value from search field, shows only new orders by default
+    const [filter, setFilter] = useState("New");
+    // State to hold the filteredProductsList
+    const [filteredList, setFilteredList] = useState([]);
+  
+    // Create new list by filtering the productsList for name
+    useEffect(() => {
+      let filteredListArray = ordersList.filter((e) => {
+        //if filter is empty, match all
+        if(filter == "Any") 
+            return true;
+        else
+            return e.Status == filter;
+      });
+      setFilteredList(filteredListArray);
+    }, [filter, ordersList]);
+  
+    return { filteredList, filter, setFilter };
+};
+
 // Update
-export default function useUpdateOrder(val) {
+function useUpdateOrder(val) {
     // State to update with
     const [newOrder, setNewOrder] = useState({
         cart: [],
@@ -45,3 +67,23 @@ export default function useUpdateOrder(val) {
 
     return { updateOrderStatus, newOrder, setNewOrder };
 };
+
+// Status dropdown button colors
+function getStatusVariant(status) {
+    switch (status) {
+        case 'Any':
+            return 'primary';
+        case 'New':
+            return 'danger';
+        case 'In Progress':
+            return 'warning';
+        case 'Delivery':
+            return 'info';
+        case 'Delivered':
+            return 'success';
+        default:
+            return 'primary';
+    }
+};
+
+export { useFilteredOrdersList, useUpdateOrder, getStatusVariant };
