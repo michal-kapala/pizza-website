@@ -10,6 +10,21 @@ const useProductsStates = () => {
     description: "",
     category: "",
     imageUrl: "",
+    extra1: {
+      name: "",
+      emoji: "",
+      price: 0
+    },
+    extra2: {
+      name: "",
+      emoji: "",
+      price: 0
+    },
+    extra3: {
+      name: "",
+      emoji: "",
+      price: 0
+    },
   });
 
   return { productsStates, setProductsStates };

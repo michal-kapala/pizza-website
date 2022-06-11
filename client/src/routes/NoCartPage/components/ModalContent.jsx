@@ -9,6 +9,7 @@ import {
   Row,
 } from "react-bootstrap";
 import MyButton from "../../../shared components/MyButton";
+import Extras from "./Extras";
 import { useQuantitySelector, useHandleSubmit } from "./ModalContentLogic";
 
 // Content of Modal in NoCartPage
@@ -66,9 +67,15 @@ export default function ModalContent(props) {
           <Card.Subtitle className="mb-3">{content.Description}</Card.Subtitle>
 
           {/* Render sizes for pizza only if content is pizza and particular pizza has multiple sizes */}
-          {content.Category === "pizza" && content.Price[1] ? (
-            <PizzaSize setSize={setSize} />
-          ) : null}
+          <Row>
+            {content.Category === "pizza" && content.Price[1] ? (
+              <Col>
+                <PizzaSize setSize={setSize} />
+              </Col>
+            ) : null}
+            <Extras extrasList={content.Extras}/>  
+          </Row>
+          
           <Card.Text>
             Other info (optional):{" "}
             <FormControl

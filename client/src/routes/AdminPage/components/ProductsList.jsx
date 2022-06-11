@@ -158,12 +158,190 @@ const List = (props) => {
             />
           </Col>
         </Row>
+        
+        <Row className="mt-2 mb-2">
+          <Col className="mt-3">
+            <Card.Subtitle className="mt-4">
+              <b>Extra 1</b>
+            </Card.Subtitle>
+          </Col>
+          <Col>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              value={newProduct.extra1.name == undefined ? "" : newProduct.extra1.name}
+              onChange={(event) => {
+                var extra = {
+                  name: event.target.value,
+                  emoji: newProduct.extra1.emoji,
+                  price: newProduct.extra1.price
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra1: extra
+                });
+              }}
+            />
+          </Col>
+          <Col>
+            <Form.Label>Emoji</Form.Label>
+            <Form.Control
+              value={newProduct.extra1.emoji == undefined ? "" : newProduct.extra1.emoji}
+              onChange={(event) => {
+                var extra = {
+                  name: newProduct.extra1.name,
+                  emoji: event.target.value,
+                  price: newProduct.extra1.price
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra1: extra
+                });
+              }}
+            />
+          </Col>
+          <Col>
+            <Form.Label>Unit price (PLN)</Form.Label>
+            <Form.Control
+              value={newProduct.extra1.price == undefined ? 0 : newProduct.extra1.price}
+              onChange={(event) => {
+                var extra = {
+                  name: newProduct.extra1.name,
+                  emoji: newProduct.extra1.emoji,
+                  price: parseFloat(event.target.value)
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra1: extra
+                });
+              }}
+            />
+          </Col>
+        </Row>
+
+        <Row className="mt-2 mb-2">
+          <Col className="mt-3">
+            <Card.Subtitle className="mt-4">
+              <b>Extra 2</b>
+            </Card.Subtitle>
+          </Col>
+          <Col>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              value={newProduct.extra2.name == undefined ? "" : newProduct.extra2.name}
+              onChange={(event) => {
+                var extra = {
+                  name: event.target.value,
+                  emoji: newProduct.extra2.emoji,
+                  price: newProduct.extra2.price
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra2: extra
+                });
+              }}
+            />
+          </Col>
+          <Col>
+            <Form.Label>Emoji</Form.Label>
+            <Form.Control
+              value={newProduct.extra2.emoji == undefined ? "" : newProduct.extra2.emoji}
+              onChange={(event) => {
+                var extra = {
+                  name: newProduct.extra2.name,
+                  emoji: event.target.value,
+                  price: newProduct.extra2.price
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra2: extra
+                });
+              }}
+            />
+          </Col>
+          <Col>
+            <Form.Label>Unit price (PLN)</Form.Label>
+            <Form.Control
+              value={newProduct.extra2.price == undefined ? 0 : newProduct.extra2.price}
+              onChange={(event) => {
+                var extra = {
+                  name: newProduct.extra2.name,
+                  emoji: newProduct.extra2.emoji,
+                  price: parseFloat(event.target.value)
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra2: extra
+                });
+              }}
+            />
+          </Col>
+        </Row>
+
+        <Row className="mt-2 mb-2">
+          <Col className="mt-3">
+            <Card.Subtitle className="mt-4">
+              <b>Extra 3</b>
+            </Card.Subtitle>
+          </Col>
+          <Col>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              value={newProduct.extra3.name == undefined ? "" : newProduct.extra3.name}
+              onChange={(event) => {
+                var extra = {
+                  name: event.target.value,
+                  emoji: newProduct.extra3.emoji,
+                  price: newProduct.extra3.price
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra3: extra
+                });
+              }}
+            />
+          </Col>
+          <Col>
+            <Form.Label>Emoji</Form.Label>
+            <Form.Control
+              value={newProduct.extra3.emoji == undefined ? "" : newProduct.extra3.emoji}
+              onChange={(event) => {
+                var extra = {
+                  name: newProduct.extra3.name,
+                  emoji: event.target.value,
+                  price: newProduct.extra3.price
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra3: extra
+                });
+              }}
+            />
+          </Col>
+          <Col>
+            <Form.Label>Unit price (PLN)</Form.Label>
+            <Form.Control
+              value={newProduct.extra3.price == undefined ? 0 : newProduct.extra3.price}
+              onChange={(event) => {
+                var extra = {
+                  name: newProduct.extra3.name,
+                  emoji: newProduct.extra3.emoji,
+                  price: parseFloat(event.target.value)
+                };
+                setNewProduct({
+                  ...newProduct,
+                  extra3: extra
+                });
+              }}
+            />
+          </Col>
+        </Row>
+
         <Col>
           <Form.Label>New description</Form.Label>
           <Form.Control
             as="textarea"
             rows={4}
-            placeholder="Descriere noua"
+            placeholder="Product description"
             value={newProduct.description}
             onChange={(event) => {
               setNewProduct({

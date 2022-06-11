@@ -119,6 +119,7 @@ const Category = ({ title, id, mapOver, setShow, setContent }) => {
                     Price: val.Price,
                     Category: val.Category,
                     Image: val.Image,
+                    Extras: val.Extras,
                   });
                 }}
                 className={"m-4"}

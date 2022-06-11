@@ -27,6 +27,21 @@ const useUpdateProducts = (val) => {
     price: 0,
     price2: 0,
     price3: 0,
+    extra1: {
+      name: "",
+      emoji: "",
+      price: 0
+    },
+    extra2: {
+      name: "",
+      emoji: "",
+      price: 0
+    },
+    extra3: {
+      name: "",
+      emoji: "",
+      price: 0
+    },
     quantity: 1, // Set quantity to 1 because that's how this restaurant sells
     description: "",
     category: "",
@@ -41,6 +56,9 @@ const useUpdateProducts = (val) => {
       price: val.Price[0],
       price2: val.Price[1],
       price3: val.Price[2],
+      extra1: val.Extras[0],
+      extra2: val.Extras[1],
+      extra3: val.Extras[2],
       description: val.Description,
       category: val.Category,
       imageUrl: val.Image,

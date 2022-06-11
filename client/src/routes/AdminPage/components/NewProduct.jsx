@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, Row, Col, Form, Button, Container } from "react-bootstrap";
 import { useAddToProducts, useProductsStates } from "./NewProductLogic";
 
@@ -9,6 +10,25 @@ export default function NewProduct(props) {
 
   // Add to Products Collection
   const { addToProducts } = useAddToProducts();
+
+  // New extras' states
+  const [newExtra1, setNewExtra1] = useState({
+    name: "",
+    emoji: "",
+    price: 0
+  });
+
+  const [newExtra2, setNewExtra2] = useState({
+    name: "",
+    emoji: "",
+    price: 0
+  });
+
+  const [newExtra3, setNewExtra3] = useState({
+    name: "",
+    emoji: "",
+    price: 0
+  });
 
   return (
     <Container className="text-center">
@@ -68,6 +88,165 @@ export default function NewProduct(props) {
               setProductsStates({
                 ...productsStates,
                 imageUrl: event.target.value,
+              });
+            }}
+          />
+        </Col>
+      </Row>
+
+      <Card.Subtitle className="mt-4">
+        <b>Extra 1</b>
+      </Card.Subtitle>
+      <Row className="mt-2 mb-2 ">
+        <Col>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            onChange={(event) => {
+              setNewExtra1({
+                ...newExtra1,
+                name: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra1,
+              });
+            }}
+          />
+        </Col>
+        <Col>
+          <Form.Label>Emoji</Form.Label>
+          <Form.Control
+            onChange={(event) => {
+              setNewExtra1({
+                ...newExtra1,
+                emoji: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra1,
+              });
+            }}
+          />
+        </Col>
+        <Col>
+          <Form.Label>Unit price (PLN)</Form.Label>
+          <Form.Control
+            type="number"
+            value={0}
+            onChange={(event) => {
+              setNewExtra1({
+                ...newExtra1,
+                price: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra1,
+              });
+            }}
+          />
+        </Col>
+      </Row>
+
+      <Card.Subtitle className="mt-4">
+        <b>Extra 2</b>
+      </Card.Subtitle>
+      <Row className="mt-2 mb-2 ">
+        <Col>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            onChange={(event) => {
+              setNewExtra2({
+                ...newExtra2,
+                name: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra2,
+              });
+            }}
+          />
+        </Col>
+        <Col>
+          <Form.Label>Emoji</Form.Label>
+          <Form.Control
+            onChange={(event) => {
+              setNewExtra2({
+                ...newExtra2,
+                emoji: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra2,
+              });
+            }}
+          />
+        </Col>
+        <Col>
+          <Form.Label>Unit price (PLN)</Form.Label>
+          <Form.Control
+            type="number"
+            value={0}
+            onChange={(event) => {
+              setNewExtra3({
+                ...newExtra3,
+                price: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra3,
+              });
+            }}
+          />
+        </Col>
+      </Row>
+
+      <Card.Subtitle className="mt-4">
+        <b>Extra 3</b>
+      </Card.Subtitle>
+      <Row className="mt-2 mb-2 ">
+        <Col>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            onChange={(event) => {
+              setNewExtra1({
+                ...newExtra1,
+                name: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra1,
+              });
+            }}
+          />
+        </Col>
+        <Col>
+          <Form.Label>Emoji</Form.Label>
+          <Form.Control
+            onChange={(event) => {
+              setNewExtra1({
+                ...newExtra1,
+                emoji: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra1,
+              });
+            }}
+          />
+        </Col>
+        <Col>
+          <Form.Label>Unit price (PLN)</Form.Label>
+          <Form.Control
+            type="number"
+            value={0}
+            onChange={(event) => {
+              setNewExtra1({
+                ...newExtra1,
+                price: event.target.value
+              }); 
+              setProductsStates({
+                ...productsStates,
+                extra1: newExtra1,
               });
             }}
           />
