@@ -16,7 +16,7 @@ export default function TrackOrderPage(props) {
 
   // Show order status
   const OrderStatus = () => {
-    if (orderData.status == "New") {
+    if (orderData.status === 'New') {
       return (
         <>
           <Card.Title className="fs-2">
@@ -27,7 +27,7 @@ export default function TrackOrderPage(props) {
           </Card.Subtitle>
         </>
       );
-    } else if (orderData.status == "In Progress") {
+    } else if (orderData.status === 'In Progress') {
       return (
         <>
           <Card.Title className="fs-2">
@@ -38,7 +38,7 @@ export default function TrackOrderPage(props) {
           </Card.Subtitle>
         </>
       );
-    } else if (orderData.status == "Delivery") {
+    } else if (orderData.status === 'Delivery') {
       return (
         <>
           <Card.Title className="fs-2">
@@ -74,7 +74,7 @@ export default function TrackOrderPage(props) {
         </Container>
 
         {orderData.order.map((e) => {
-          return <CartBody key={e.Name} e={e} address={orderData.address} status={orderData.status}/>;
+          return <CartBody key={e.Name} e={e} address={orderData.address} />;
         })}
       </main>
     );
@@ -83,7 +83,7 @@ export default function TrackOrderPage(props) {
 
 // Using another component because Total Price could not have been calculated without. Calling custom hooks in return statement is not possible
 const CartBody = (props) => {
-  const { e, address, status } = props;
+  const { e, address } = props;
   return (
     <Container>
       <Details cart={e} title="Order details">

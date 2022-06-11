@@ -168,7 +168,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Name</Form.Label>
             <Form.Control
-              value={newProduct.extra1.name == undefined ? "" : newProduct.extra1.name}
+              value={newProduct.extra1.name === undefined ? "" : newProduct.extra1.name}
               onChange={(event) => {
                 var extra = {
                   name: event.target.value,
@@ -185,7 +185,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Emoji</Form.Label>
             <Form.Control
-              value={newProduct.extra1.emoji == undefined ? "" : newProduct.extra1.emoji}
+              value={newProduct.extra1.emoji === undefined ? "" : newProduct.extra1.emoji}
               onChange={(event) => {
                 var extra = {
                   name: newProduct.extra1.name,
@@ -202,7 +202,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Unit price (PLN)</Form.Label>
             <Form.Control
-              value={newProduct.extra1.price == undefined ? 0 : newProduct.extra1.price}
+              value={newProduct.extra1.price === undefined ? 0 : newProduct.extra1.price}
               onChange={(event) => {
                 var extra = {
                   name: newProduct.extra1.name,
@@ -227,7 +227,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Name</Form.Label>
             <Form.Control
-              value={newProduct.extra2.name == undefined ? "" : newProduct.extra2.name}
+              value={newProduct.extra2.name === undefined ? "" : newProduct.extra2.name}
               onChange={(event) => {
                 var extra = {
                   name: event.target.value,
@@ -244,7 +244,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Emoji</Form.Label>
             <Form.Control
-              value={newProduct.extra2.emoji == undefined ? "" : newProduct.extra2.emoji}
+              value={newProduct.extra2.emoji === undefined ? "" : newProduct.extra2.emoji}
               onChange={(event) => {
                 var extra = {
                   name: newProduct.extra2.name,
@@ -261,7 +261,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Unit price (PLN)</Form.Label>
             <Form.Control
-              value={newProduct.extra2.price == undefined ? 0 : newProduct.extra2.price}
+              value={newProduct.extra2.price === undefined ? 0 : newProduct.extra2.price}
               onChange={(event) => {
                 var extra = {
                   name: newProduct.extra2.name,
@@ -286,7 +286,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Name</Form.Label>
             <Form.Control
-              value={newProduct.extra3.name == undefined ? "" : newProduct.extra3.name}
+              value={newProduct.extra3.name === undefined ? "" : newProduct.extra3.name}
               onChange={(event) => {
                 var extra = {
                   name: event.target.value,
@@ -303,7 +303,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Emoji</Form.Label>
             <Form.Control
-              value={newProduct.extra3.emoji == undefined ? "" : newProduct.extra3.emoji}
+              value={newProduct.extra3.emoji === undefined ? "" : newProduct.extra3.emoji}
               onChange={(event) => {
                 var extra = {
                   name: newProduct.extra3.name,
@@ -320,7 +320,7 @@ const List = (props) => {
           <Col>
             <Form.Label>Unit price (PLN)</Form.Label>
             <Form.Control
-              value={newProduct.extra3.price == undefined ? 0 : newProduct.extra3.price}
+              value={newProduct.extra3.price === undefined ? 0 : newProduct.extra3.price}
               onChange={(event) => {
                 var extra = {
                   name: newProduct.extra3.name,

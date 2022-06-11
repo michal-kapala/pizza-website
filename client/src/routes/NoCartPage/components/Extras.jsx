@@ -16,7 +16,7 @@ export default function Extras(props) {
 
 function List(props) {
     const { name, emoji, price } = props;
-    const bRender = name != undefined && name != "" && price != undefined && price != 0;
+    const bRender = name !== undefined && name !== "" && price !== undefined && price !== 0;
 
     return (
       <>

@@ -45,7 +45,7 @@ export default function ModalContent(props) {
                 label={Object.keys(e)}
                 id={Object.keys(e)}
                 value={Object.values(e)}
-                checked={size == Object.values(e)}
+                checked={size === Object.values(e)}
                 onChange={(e) => {
                   setSize(e.currentTarget.value);
                   setSizeName(e.currentTarget.id);

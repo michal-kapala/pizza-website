@@ -4,7 +4,7 @@ import Axios from "axios";
 // Filter the orderList by status
 const useFilteredOrdersList = (ordersList) => {
     // State to hold the value from search field, shows only new orders by default
-    const [filter, setFilter] = useState("New");
+    const [filter, setFilter] = useState('New');
     // State to hold the filteredProductsList
     const [filteredList, setFilteredList] = useState([]);
   
@@ -12,10 +12,10 @@ const useFilteredOrdersList = (ordersList) => {
     useEffect(() => {
       let filteredListArray = ordersList.filter((e) => {
         //if filter is empty, match all
-        if(filter == "Any") 
+        if(filter === 'Any') 
             return true;
         else
-            return e.Status == filter;
+            return e.Status === filter;
       });
       setFilteredList(filteredListArray);
     }, [filter, ordersList]);
@@ -41,7 +41,7 @@ function useUpdateOrder(val) {
 
     // Set values to the previous values
     useEffect(() => {
-        const phone = val.PhoneNumber == undefined ? "0" : val.PhoneNumber;
+        const phone = val.PhoneNumber === undefined ? "0" : val.PhoneNumber;
         setNewOrder({
             ...newOrder,
             cart: val.Cart,
