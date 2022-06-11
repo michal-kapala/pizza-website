@@ -12,6 +12,7 @@ const InsertOrder = (req) => {
   const deliveryDetails = req.body.DeliveryDetails;
 
   InsertIntoOrders(cart, userDetails, deliveryDetails);
+  return res.sendStatus(201);
 };
 
 const GetCarts = async (req, res) => {
@@ -32,14 +33,14 @@ const GetOrder = async (req, res) => {
 
 const GetOrders = async (req, res) => {
   const orders = await GetFromOrdersAdmin();
-
   return res.send(orders);
 };
 
-const UpdateOrder = async(req) => {
+const UpdateOrder = (req, res) => {
   const newOrder = req.body.newOrder;
   const id = req.body.id;
   UpdateOrders(id, newOrder);
+  return res.sendStatus(200);
 };
 
 module.exports = { InsertOrder, GetCarts, GetOrder, GetOrders, UpdateOrder };

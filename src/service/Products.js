@@ -11,6 +11,19 @@ const GetFromProducts = async () => {
   }
 };
 
+// Get products from id array
+async function GetFromProductsIds(ids) {
+  var products = [];
+  ids.forEach(async (id) => {
+    const product = await ProductsModel.findOne({_id: id}, (err, result) => {
+      return result;
+    });
+    if(product != null)
+      products.push(product);
+  });
+  return products;
+}
+
 const InsertIntoProducts = async (product) => {
   var extras = [];
 
@@ -121,4 +134,5 @@ module.exports = {
   InsertIntoProducts,
   UpdateProducts,
   DeleteProducts,
+  GetFromProductsIds,
 };

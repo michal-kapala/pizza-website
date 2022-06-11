@@ -32,6 +32,9 @@ app.use("/", ordersRoute);
 const usersRoute = require("./src/routes/Users");
 app.use("/", usersRoute);
 
+const offersRoute = require("./src/routes/Offers");
+app.use("/offers", offersRoute);
+
 // **** END MongoDB ****
 
 // **** Mailjet ****
