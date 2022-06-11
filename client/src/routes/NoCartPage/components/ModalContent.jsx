@@ -30,6 +30,9 @@ export default function ModalContent(props) {
   // State for specifics for product
   const [specifics, setSpecifics] = useState("");
 
+  // State for extras price
+  const [extrasPrice, setExtrasPrice] = useState(0);
+
   // If the Product Category === "pizza", make options for size
   const PizzaSize = () => {
     // This Array is used to set size for pizza and to keep the checked value for the <Form.Check />
@@ -45,7 +48,7 @@ export default function ModalContent(props) {
                 label={Object.keys(e)}
                 id={Object.keys(e)}
                 value={Object.values(e)}
-                checked={size === Object.values(e)}
+                checked={size == Object.values(e)}
                 onChange={(e) => {
                   setSize(e.currentTarget.value);
                   setSizeName(e.currentTarget.id);
@@ -63,7 +66,7 @@ export default function ModalContent(props) {
       <Card>
         <Card.Img variant="top" src={`images/${content.Image}.jpg`} />
         <Card.Body>
-          <Card.Title>{content.Price[size]} PLN</Card.Title>
+          <Card.Title>{(content.Price[size] + extrasPrice).toFixed(2).replace('.', ',')} PLN</Card.Title>
           <Card.Subtitle className="mb-3">{content.Description}</Card.Subtitle>
 
           {/* Render sizes for pizza only if content is pizza and particular pizza has multiple sizes */}
@@ -73,7 +76,7 @@ export default function ModalContent(props) {
                 <PizzaSize setSize={setSize} />
               </Col>
             ) : null}
-            <Extras extrasList={content.Extras}/>  
+            <Extras extrasList={content.Extras} totalPrice={extrasPrice} setTotalPrice={setExtrasPrice}/>
           </Row>
           
           <Card.Text>
@@ -114,7 +117,7 @@ export default function ModalContent(props) {
                     setCart,
                     content,
                     quantity,
-                    content.Price[size],
+                    content.Price[size] + extrasPrice,
                     sizeName,
                     specifics
                   )

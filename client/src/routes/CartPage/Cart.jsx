@@ -34,7 +34,7 @@ export default function Cart(props) {
               })}
             </Card>
             <Card.Title className="fw-bold mt-5 mb-5">
-              Total: {totalPrice} PLN
+              Total: {totalPrice.toFixed(2).replace('.', ',')} PLN
             </Card.Title>
 
             <Link to="/checkout">
@@ -111,7 +111,7 @@ const FoodBox = (props) => {
       </Col>
       <Col>
         <Card.Title className="">
-          {value.Price * value.Quantity} PLN
+          {(value.Price * value.Quantity).toFixed(2).replace('.', ',')} PLN
         </Card.Title>
       </Col>
     </Row>

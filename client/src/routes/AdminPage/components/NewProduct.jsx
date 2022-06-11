@@ -131,12 +131,10 @@ export default function NewProduct(props) {
         <Col>
           <Form.Label>Unit price (PLN)</Form.Label>
           <Form.Control
-            type="number"
-            value={0}
             onChange={(event) => {
               setNewExtra1({
                 ...newExtra1,
-                price: event.target.value
+                price: parseFloat(event.target.value).toFixed(2).replace('.', ',')
               }); 
               setProductsStates({
                 ...productsStates,
@@ -184,12 +182,10 @@ export default function NewProduct(props) {
         <Col>
           <Form.Label>Unit price (PLN)</Form.Label>
           <Form.Control
-            type="number"
-            value={0}
             onChange={(event) => {
               setNewExtra3({
                 ...newExtra3,
-                price: event.target.value
+                price: parseFloat(event.target.value).toFixed(2).replace('.', ',')
               }); 
               setProductsStates({
                 ...productsStates,
@@ -237,12 +233,10 @@ export default function NewProduct(props) {
         <Col>
           <Form.Label>Unit price (PLN)</Form.Label>
           <Form.Control
-            type="number"
-            value={0}
             onChange={(event) => {
               setNewExtra1({
                 ...newExtra1,
-                price: event.target.value
+                price: parseFloat(event.target.value).toFixed(2).replace('.', ',')
               }); 
               setProductsStates({
                 ...productsStates,
