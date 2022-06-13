@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import Axios from "axios";
 
 // Read from Products Collection
@@ -32,4 +31,19 @@ const useOrdersList = () => {
   return { ordersList, setOrdersList };
 };
 
-export { useProductsList, useOrdersList };
+// Read from Offers Collection
+const useOffersList = () => {
+  const [offersList, setOffersList] = useState([]);
+
+  useEffect(() => {
+    Axios.get(`${process.env.REACT_APP_ENDPOINT}/offers`).then(
+      (response) => {
+        setOffersList(response.data.reverse());
+      }
+    );
+  }, []);
+
+  return { offersList, setOffersList };
+};
+
+export { useProductsList, useOrdersList, useOffersList };

@@ -47,8 +47,8 @@ async function InsertOfferSvc(offer) {
     ValidThrough: offer.validThrough,
     Code: offer.code,
     Description: offer.description,
+    Amount: offer.amount,
     DiscountFlat: offer.discountFlat,
-    Homogenous: offer.homogenous,
   });
   
   try {
@@ -67,8 +67,8 @@ async function UpdateOfferSvc(id, offer) {
       updatedOffer.ValidThrough = offer.validThrough;
       updatedOffer.Code = offer.code;
       updatedOffer.Description = offer.description;
+      updatedOffer.Amount = offer.amount;
       updatedOffer.DiscountFlat = offer.discountFlat;
-      updatedOffer.Homogenous = offer.homogenous;
       updatedOffer.save();
     });
   } catch (err) {

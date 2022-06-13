@@ -61,9 +61,9 @@ const List = (props) => {
             : `${val.Price[0]}, ${val.Price[1]}, ${val.Price[2]} PLN`}
         </Card.Title>
 
-        <Card.Title>
+        <Card.Subtitle>
           Write in the field that you want to change or delete the product
-        </Card.Title>
+        </Card.Subtitle>
         <Card.Subtitle className="mt-2 mb-4">
           <strong>Warning:</strong> &nbsp; If you have added another 2 sizes for
           a product and you want to delete the last one, you will have to delete

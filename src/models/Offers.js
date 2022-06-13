@@ -25,12 +25,12 @@ const OffersSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  DiscountFlat: {
+  Amount: {
     type: Number,
     required: true,
   },
-  Homogenous: {
-    type: Boolean,
+  DiscountFlat: {
+    type: Number,
     required: true,
   },
 });
