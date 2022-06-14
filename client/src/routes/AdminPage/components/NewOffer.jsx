@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, Row, Col, Form, Button, Container, } from "react-bootstrap";
 import { useAddToOffers } from "./NewOfferLogic";
-import ProductChecklist from "./ProductChecklist";
+import ProductChecklistItem from "./ProductChecklistItem";
 
 export default function NewOffer(props) {
   // Data lists
@@ -66,12 +66,13 @@ export default function NewOffer(props) {
         <Row className="mt-3">
           <Form.Label>Choose eligible product(s)</Form.Label>
           {productList.map((product) => {
-            return <ProductChecklist 
+            return <ProductChecklistItem 
               product={product}
               newOffer={newOffer}
               setNewOffer={setNewOffer}
-              selectedProducts={selectedProducts}
-              setSelectedProducts={setSelectedProducts}/>
+              selected={selectedProducts}
+              setSelected={setSelectedProducts}
+              check={false}/>
           })}
         </Row>
         <Row className="mt-4 ">
@@ -113,10 +114,13 @@ export default function NewOffer(props) {
             <Form.Control
               type="date"
               onChange={(event) => {
+                // on erase, set the current date
+                if(event.target.value == "")
+                  event.target.value = new Date(Date.now()).toISOString().substring(0,10);
                 setNewOffer({
                   ...newOffer,
-                  // yyyy-mm-dd to epoch timestamp
-                  validThrough: Date.parse(event.target.value)
+                  // yyyy-mm-dd to ISO date
+                  validThrough: new Date(Date.parse(event.target.value)).toISOString()
                 });
               }}
             />

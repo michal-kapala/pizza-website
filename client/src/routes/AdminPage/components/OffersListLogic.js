@@ -23,6 +23,7 @@ function useFilteredOffersList(offersList) {
 function useUpdateOffers(val) {
   // State to update with
   const [newOffer, setNewOffer] = useState({
+    _id: val._id,
     products: val.Products,
     type: val.Type,
     validThrough: val.ValidThrough,
@@ -47,7 +48,7 @@ function useUpdateOffers(val) {
   }, []);
 
   const updateOffers = (id, offer) => {
-    Axios.put(`${process.env.REACT_APP_ENDPOINT}/offers?id=${id}`, {
+    Axios.put(`${process.env.REACT_APP_ENDPOINT}/offers/${id}`, {
       id: id,
       offer: offer,
     });
@@ -55,20 +56,19 @@ function useUpdateOffers(val) {
   return { updateOffers, newOffer, setNewOffer };
 };
 
-// Return product ids from an offer
-function getCheckedProducts(offer) {
-  var checked = [];
-  offer.products.forEach(id => {
-    checked.push(id);
-  });
-  return checked;
-};
-
 function useDeleteOffers() {
   function deleteOffer(id) {
-      Axios.delete(`${process.env.REACT_APP_ENDPOINT}/offers?id=${id}`);
+      Axios.delete(`${process.env.REACT_APP_ENDPOINT}/offers/${id}`);
   }
   return { deleteOffer };
 }
 
-export { useFilteredOffersList, useUpdateOffers, useDeleteOffers, getCheckedProducts };
+// Filter product list with mirror id list
+function getSelectedProducts(ids, products) {
+  var result = products.filter((p) => {
+    return ids.includes(p._id);
+  });
+  return result;
+};
+
+export { useFilteredOffersList, useUpdateOffers, useDeleteOffers, getSelectedProducts };

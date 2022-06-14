@@ -8,17 +8,13 @@ import {
   Card,
   Button
 } from "react-bootstrap";
-import { useFilteredOffersList, useUpdateOffers, useDeleteOffers, getCheckedProducts } from "./OffersListLogic";
-import ProductChecklist from "./ProductChecklist";
+import { useFilteredOffersList, useUpdateOffers, useDeleteOffers, getSelectedProducts } from "./OffersListLogic";
+import ProductChecklistItem from "./ProductChecklistItem";
 
 export default function OffersList(props) {
   const { offersList, productsList } = props;
-
   // Filtered list state (by description)
   const { filteredList, setFilter } = useFilteredOffersList(offersList);
-
-  // The products selected for the new offer
-  const [selectedProducts, setSelectedProducts] = useState([]);
 
   return(
     <Container className="text-center mt-5">
@@ -38,20 +34,19 @@ export default function OffersList(props) {
           return <List 
             val={val} 
             key={val._id}
-            productsList={productsList}
-            selectedProducts={selectedProducts}
-            setSelectedProducts={setSelectedProducts}/>;
+            productsList={productsList}/>;
         })}
     </Container>
   );
 };
 
 function List(props) {
-  const { val, key, productsList, selectedProducts, setSelectedProducts } = props;
-
+  const { val, key, productsList } = props;
   const { updateOffers, newOffer, setNewOffer } = useUpdateOffers(val);
-
   const { deleteOffer } = useDeleteOffers();
+
+  // The products selected for the new updated offer
+  const [selectedProducts, setSelectedProducts] = useState(getSelectedProducts(newOffer.products, productsList));
 
   return(
     <>
@@ -103,12 +98,13 @@ function List(props) {
         <Row className="mt-3">
           <Form.Label>Choose eligible product(s)</Form.Label>
           {productsList.map((product) => {
-            return <ProductChecklist 
+            return <ProductChecklistItem 
               product={product}
               newOffer={newOffer}
               setNewOffer={setNewOffer}
-              selectedProducts={newOffer.products}
-              setSelectedProducts={setSelectedProducts}/>
+              selected={selectedProducts}
+              setSelected={setSelectedProducts}
+              check={selectedProducts.includes(product)}/>
           })}
         </Row>
         <Row className="mt-4 ">
@@ -149,14 +145,17 @@ function List(props) {
           <Col>
           <Form.Label>Expiration date</Form.Label>
             <Form.Control
-              // ISODate to yyyy-mm-dd
-              value={ new Date(Date.parse(newOffer.validThrough)).toISOString().split('T')[0] }
+              // ISO date to yyyy-mm-dd
+              value={newOffer.validThrough.substring(0, 10)}
               type="date"
               onChange={(event) => {
+                // On erase, set the current date
+                if(event.target.value == "")
+                  event.target.value = new Date(Date.now()).toISOString().substring(0,10);
                 setNewOffer({
                   ...newOffer,
-                  // yyyy-mm-dd to epoch timestamp
-                  validThrough: Date.parse(event.target.value)
+                  // yyyy-mm-dd to ISO date
+                  validThrough: new Date(Date.parse(event.target.value)).toISOString()
                 });
               }}
             />
