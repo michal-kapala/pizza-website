@@ -61,7 +61,7 @@ function List(props) {
   <>
     <Card key={val._id} className="m-3 p-3">
       <Card.Title>
-        Order {val._id} - <b>{totalPrice} PLN</b>
+        Order {val._id} - <b>{totalPrice.toFixed(2).replace('.',',')} PLN</b>
       </Card.Title>
       <Card.Subtitle><b>Ordered: </b>{timeOfOrder[idx]}</Card.Subtitle>
       <Card.Subtitle><b>Delivery: </b>{val.DeliveryWay}, {val.DeliveryTime}</Card.Subtitle>
@@ -71,10 +71,23 @@ function List(props) {
         <strong>Order details: </strong>
         <ListGroup className="p-2" as="ul">
           {val.Cart.map((element) => {
+            var hasExtras = element.Extras !== undefined;
             return (
               <ListGroup.Item className="mb-3" as="li" key={element.Name}>
                 <b>{element.Quantity}x</b> {element.Name} {" "}
-                {element.Price} PLN
+                { hasExtras && element.Extras.extra1.quantity > 0 ?
+                  ` (${element.Extras.extra1.quantity}x${element.Extras.extra1.emoji})`
+                  : null
+                } 
+                { hasExtras && element.Extras.extra2.quantity > 0 ?
+                  ` (${element.Extras.extra2.quantity}x${element.Extras.extra2.emoji})`
+                  : null
+                } 
+                { hasExtras && element.Extras.extra3.quantity > 0 ?
+                  ` (${element.Extras.extra3.quantity}x${element.Extras.extra3.emoji})`
+                  : null
+                }
+                {` - ${element.Price.toFixed(2).replace('.',',')} PLN`}  
               </ListGroup.Item>
             );
           })}

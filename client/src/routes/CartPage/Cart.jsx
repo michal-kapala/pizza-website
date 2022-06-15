@@ -91,19 +91,48 @@ const FoodBox = (props) => {
         <Card.Title>
           {value.Quantity} x {value.Name}
         </Card.Title>
+        <Col>
+          <Col>
+            {value.Extras.extra1.quantity > 0 || value.Extras.extra2.quantity > 0 || value.Extras.extra3.quantity > 0
+              ? <Card.Subtitle className="my-2">Extras per unit:</Card.Subtitle>
+              : null
+            }
+            {(value.Extras.extra1.name != null && value.Extras.extra1.quantity > 0)
+              ? <Card.Subtitle className="my-2">
+                  {value.Extras.extra1.quantity} x {value.Extras.extra1.emoji} {"("}
+                  {(value.Extras.extra1.quantity * value.Extras.extra1.price).toFixed(2).replace('.', ',')}{" PLN)"}
+                </Card.Subtitle>
+              : null
+            }
+            {(value.Extras.extra2.name != null && value.Extras.extra2.quantity > 0)
+              ? <Card.Subtitle className="my-2">
+                  {value.Extras.extra2.quantity} x {value.Extras.extra2.emoji} {"("}
+                  {(value.Extras.extra2.quantity * value.Extras.extra2.price).toFixed(2).replace('.', ',')}{" PLN)"}
+                </Card.Subtitle>
+              : null
+            }
+            {(value.Extras.extra3.name != null && value.Extras.extra3.quantity > 0)
+              ? <Card.Subtitle className="my-2">
+                  {value.Extras.extra3.quantity} x {value.Extras.extra3.emoji} {"("}
+                  {(value.Extras.extra3.quantity * value.Extras.extra3.price).toFixed(2).replace('.', ',')}{" PLN)"}
+                </Card.Subtitle>
+              : null
+            }
+          </Col>
+        </Col>
       </Col>
       <Col>
         <Button
           style={{ width: "35px" }}
           className="me-2 fontSize"
-          onClick={() => decreaseItem(value.Name)}
+          onClick={() => decreaseItem(value.ID)}
           variant="outline-dark"
         >
           -
         </Button>
         <Button
           className="fontSize"
-          onClick={() => incrementItem(value.Name)}
+          onClick={() => incrementItem(value.ID)}
           variant="outline-dark"
         >
           +

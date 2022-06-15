@@ -2,25 +2,39 @@ import { Col } from "react-bootstrap";
 import ExtrasRow from "./ExtrasRow";
 
 export default function Extras(props) {
-  // Names and unit prices of the available extras
-  const { extrasList, totalPrice, setTotalPrice } = props;
+  // Names and unit prices of the available extras, order's state
+  const { extrasList, totalPrice, setTotalPrice, orderExtras, setOrderExtras } = props;
 
   return(
     <Col>
-      {extrasList.map((e) => {
-        return <List name={e.name} emoji={e.emoji} price={e.price} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>
+      {extrasList.map((e, idx) => {
+        return <List 
+          idx={idx}
+          extra={e}
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+          orderExtras={orderExtras}
+          setOrderExtras={setOrderExtras}/>
       })}
     </Col>
   );
 };
 
 function List(props) {
-    const { name, emoji, price, totalPrice, setTotalPrice } = props;
-    const bRender = name !== undefined && name !== "" && price !== undefined && price !== 0;
+    const { idx, extra, totalPrice, setTotalPrice, orderExtras, setOrderExtras } = props;
+    const bRender = extra.name !== undefined && extra.name !== "" && extra.price !== undefined && extra.price !== 0;
 
     return (
       <>
-        {bRender ? (<ExtrasRow name={name} emoji={emoji} price={price} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>) : null}
+        {bRender 
+          ? (<ExtrasRow
+          idx={idx}
+          extra={extra}
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+          orderExtras={orderExtras}
+          setOrderExtras={setOrderExtras}/>)
+          : null}
       </>
     );
 };

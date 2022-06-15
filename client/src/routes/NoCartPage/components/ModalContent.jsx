@@ -30,6 +30,13 @@ export default function ModalContent(props) {
   // State for specifics for product
   const [specifics, setSpecifics] = useState("");
 
+  // State for ordered extras list
+  const [orderExtras, setOrderExtras] = useState({
+    extra1: {},
+    extra2: {},
+    extra3: {},
+  });
+
   // State for extras price
   const [extrasPrice, setExtrasPrice] = useState(0);
 
@@ -76,7 +83,12 @@ export default function ModalContent(props) {
                 <PizzaSize setSize={setSize} />
               </Col>
             ) : null}
-            <Extras extrasList={content.Extras} totalPrice={extrasPrice} setTotalPrice={setExtrasPrice}/>
+            <Extras 
+              extrasList={content.Extras}
+              totalPrice={extrasPrice}
+              setTotalPrice={setExtrasPrice}
+              orderExtras={orderExtras}
+              setOrderExtras={setOrderExtras}/>
           </Row>
           
           <Card.Text>
@@ -119,7 +131,8 @@ export default function ModalContent(props) {
                     quantity,
                     content.Price[size] + extrasPrice,
                     sizeName,
-                    specifics
+                    specifics,
+                    orderExtras
                   )
                 }
               />

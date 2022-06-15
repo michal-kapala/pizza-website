@@ -1,33 +1,62 @@
+import { useState, useEffect } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
-import useQuantitySelector from "./ExtrasRowLogic"
+import { useOrderExtra } from "./ExtrasRowLogic"
 
 export default function ExtrasRow(props) {
-    const { name, emoji, price, totalPrice, setTotalPrice } = props;
+    const { idx, extra, totalPrice, setTotalPrice, orderExtras, setOrderExtras } = props;
 
-    // Quantity state
-    const { quantity, decrementQuantity, incrementQuantity } = useQuantitySelector();
+    // State of a single ordered extra 
+    const [orderExtra, setOrderExtra] = useState({
+      idx: idx,
+      name: extra.name,
+      emoji: extra.emoji,
+      price: extra.price,
+      quantity: 0
+    });
+
+    // Parent extras object update
+    useEffect(() => {
+      setExtras(orderExtra, orderExtras, setOrderExtras);
+      console.info(`Extra ${orderExtra.name} update: ${orderExtra.quantity}`);
+    }, [orderExtra])
+    
+
+    // Extra state management
+    const { decrementQuantity, incrementQuantity, setExtras } = useOrderExtra(idx);
 
     return (
         <Row className="mb-1">
           <Row>
             <Form.Label>
-              {emoji} {name}
+              {orderExtra.emoji} {orderExtra.name}
             </Form.Label>
           </Row>
           <Col>
             <Button
-              onClick={() => decrementQuantity(totalPrice - price, setTotalPrice)}
+              onClick={() => {
+                decrementQuantity(orderExtra, setOrderExtra);
+                if (orderExtra.quantity > 0) {
+                  console.info(`Decremented ${orderExtra.name}: ${orderExtra.quantity}`);
+                  setTotalPrice(totalPrice - orderExtra.price);
+                }
+              }}
               variant="outline-dark"
               className="fontSize"
             >
               -
             </Button>
             <Button disabled variant="outline-dark" className="fontSize">
-              {quantity}
+              {orderExtra.quantity}
             </Button>
             
             <Button
-              onClick={() => incrementQuantity(totalPrice + price, setTotalPrice)}
+              onClick={() => {
+                incrementQuantity(orderExtra, setOrderExtra);
+                if (orderExtra.quantity < 3) {
+                  console.info(`Incremented ${orderExtra.name}: ${orderExtra.quantity}`);
+                  setTotalPrice(totalPrice + orderExtra.price);
+                }
+              }}
               variant="outline-dark"
               className="fontSize"
             >
@@ -36,10 +65,10 @@ export default function ExtrasRow(props) {
           </Col>
           
           {/* Additional extra price*/}
-          {quantity > 0 
+          {orderExtra.quantity > 0 
             ? (
               <Form.Text>
-               +{(quantity * price).toFixed(2).replace('.', ',')} PLN
+               +{(orderExtra.quantity * orderExtra.price).toFixed(2).replace('.', ',')} PLN
               </Form.Text>
             )
             : null

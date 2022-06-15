@@ -6,7 +6,7 @@ const {
   UpdateOrders,
 } = require("../service/Orders");
 
-const InsertOrder = (req) => {
+const InsertOrder = (req, res) => {
   const cart = req.body.Cart;
   const userDetails = req.body.UserDetails;
   const deliveryDetails = req.body.DeliveryDetails;

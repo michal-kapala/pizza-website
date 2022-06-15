@@ -17,6 +17,15 @@ const useQuantitySelector = () => {
 
 // Add / Update the product to the cart State Array
 const useAddToCart = () => {
+
+  // Helper function, generates uuid for a cart item
+  function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+  };
+
   const addToCart = (
     cart,
     setCart,
@@ -24,7 +33,8 @@ const useAddToCart = () => {
     quantity,
     price,
     sizeName,
-    specifics
+    specifics,
+    extras,
   ) => {
     // Name of product
     let name = content.Name;
@@ -40,16 +50,18 @@ const useAddToCart = () => {
     }
 
     // Check if Product is already in cart
-    let filteredProduct = cart.filter((value) => value.Name === name);
+    let filteredProduct = cart.filter((value) => {return value.Name === name && value.Extras === extras});
     // If product is not in cart, add it
     if (filteredProduct.length === 0) {
+    // Cart item model
       setCart((prevState) => [
         ...prevState,
         {
-          ID: content.ID,
+          ID: generateUUID(),
           Name: name,
           Quantity: quantity,
           Price: price,
+          Extras: extras
         },
       ]);
     }
@@ -78,12 +90,13 @@ const useHandleSubmit = () => {
     quantity,
     price,
     sizeName,
-    specifics
+    specifics,
+    extras
   ) => {
     // Close modal
     onClose();
     // Add to cart
-    addToCart(cart, setCart, content, quantity, price, sizeName, specifics);
+    addToCart(cart, setCart, content, quantity, price, sizeName, specifics, extras);
   };
   return { handleSubmit };
 };

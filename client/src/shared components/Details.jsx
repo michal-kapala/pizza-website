@@ -30,7 +30,7 @@ const DetailsRow = (props) => {
   return (
     <ListGroup.Item className="mb-3 " as="li">
       <strong>{value.Quantity}</strong> x {value.Name} -  {" "}
-      <strong>{value.Price * value.Quantity} PLN</strong>
+      <strong>{(value.Price * value.Quantity).toFixed(2).replace('.', ',')} PLN</strong>
     </ListGroup.Item>
   );
 };
