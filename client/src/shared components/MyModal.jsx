@@ -15,7 +15,7 @@ export default function MyModal(props) {
       <Modal.Header
         closeButton
         closeVariant="white"
-        className="black-bg text-white"
+        className="black-bg text-white text-center"
       >
         <Modal.Title className="roleway" id="contained-modal-title-vcenter">
           {name}

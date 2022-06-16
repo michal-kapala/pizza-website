@@ -23,12 +23,11 @@ export default function Cart(props) {
           <>
             <Card className="mt-5 p-3 itemsCenterLT540W">
               {cart.map((value) => {
-                return (
-                  <FoodBox
-                    key={value.Name}
+                return(
+                  <CartItem
+                    value={value}
                     cart={cart}
                     setCart={setCart}
-                    value={value}
                   />
                 );
               })}
@@ -46,6 +45,30 @@ export default function Cart(props) {
     </Container>
   );
 }
+
+// Renders product or offer cart item
+function CartItem(props) {
+  const { value, cart, setCart } = props;
+  const offer = value.Offer;
+  return (
+    <Row className="mb-2 mt-2">
+      { offer != null
+        ? <OfferBox 
+            key={value.ID}
+            cart={cart}
+            setCart={setCart}
+            value={value}
+          />
+        : <FoodBox
+            key={value.ID}
+            cart={cart}
+            setCart={setCart}
+            value={value}
+          />
+      }
+    </Row>
+  );
+};
 
 // The next component is used to return different UI for when Cart state is empty or not.
 const CartEmptyOrNot = ({ cart }) => {
@@ -76,7 +99,7 @@ const CartEmptyOrNot = ({ cart }) => {
     );
 };
 
-// This Component is the row for particular item. It has option to add or substract from quantity.
+// This Component is the row for particular product cart item. It has option to add or substract from quantity.
 const FoodBox = (props) => {
   const { value, cart, setCart } = props;
   const { incrementItem, decreaseItem } = useQuantitySelector(
@@ -86,7 +109,7 @@ const FoodBox = (props) => {
   );
 
   return (
-    <Row className="mb-2 mt-2" xs={2} sm={3} md={3} lg={3} xl={3} xxl={3}>
+    <Row className="align-items-center">
       <Col>
         <Card.Title>
           {value.Quantity} x {value.Name}
@@ -122,6 +145,49 @@ const FoodBox = (props) => {
         </Col>
       </Col>
       <Col>
+        <Button
+          style={{ width: "35px" }}
+          className="me-2 fontSize"
+          onClick={() => decreaseItem(value.ID)}
+          variant="outline-dark"
+        >
+          -
+        </Button>
+        <Button
+          className="fontSize"
+          onClick={() => incrementItem(value.ID)}
+          variant="outline-dark"
+        >
+          +
+        </Button>
+      </Col>
+      <Col>
+        <Card.Title className="">
+          {(value.Price * value.Quantity).toFixed(2).replace('.', ',')} PLN
+        </Card.Title>
+      </Col>
+    </Row>
+  );
+};
+
+// This Component is the row for particular offer cart item. It has option to add or substract from quantity.
+function OfferBox(props) {
+  const {value, cart, setCart} = props;
+  const { incrementItem, decreaseItem } = useQuantitySelector(
+    cart,
+    setCart,
+    value
+  );
+
+  return(
+    <Row className="align-items-center">
+      <Col>
+        <Card.Title>
+          {value.Name}
+        </Card.Title>
+        <Card.Text>{value.Quantity} x Offer</Card.Text>
+      </Col>
+      <Col className="">
         <Button
           style={{ width: "35px" }}
           className="me-2 fontSize"

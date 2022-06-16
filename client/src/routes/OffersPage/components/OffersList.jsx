@@ -2,7 +2,7 @@ import { Container, Card } from 'react-bootstrap';
 import { getNewPrice, getOldPrice, getProductNames } from "./OffersListLogic";
 
 function OffersList(props) {
-    const { offers } = props;
+    const { offers, setContent, setShow } = props;
     
     return(
       <Container fluid className="text-center mt-4">
@@ -14,7 +14,17 @@ function OffersList(props) {
         </Card.Text>
         <section className="d-flex flex-wrap justify-content-center mt-1">
           {offers.map((offer) => {
-            return <OfferItem offer={offer}/>
+            return (
+              <section
+                key={offer._id}
+                onClick={() => {
+                  setShow((currShow) => !currShow);
+                  setContent(offer);
+                }}
+              >
+                <OfferItem offer={offer}/>
+              </section>
+            );
           })}
         </section>
       </Container>
@@ -29,8 +39,10 @@ function OfferItem(props) {
   return(
     <>
       <Card className="grow cursor mx-3 mb-4 p-0" style={{ width: "17rem" }}>
-        <Card.Header className="black-bg text-white">
-          <Card.Subtitle>{offer.Description}</Card.Subtitle>
+        <Card.Header className="black-bg text-white py-3" style={{height: "4rem"}}>
+          <Card.Subtitle>
+            {offer.Description}
+          </Card.Subtitle>
         </Card.Header>
         <Card.Img 
           style={{ height: "11rem"}}

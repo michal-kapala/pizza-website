@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Row, Col, Form, Button, Container, } from "react-bootstrap";
 import { useAddToOffers } from "./NewOfferLogic";
 import ProductChecklistItem from "./ProductChecklistItem";
@@ -23,6 +23,18 @@ export default function NewOffer(props) {
   // Submit offer function
   const { addToOffers } = useAddToOffers();
 
+  // Block the submit button
+  const [blockSubmit, setBlockSubmit] = useState(true);
+
+  // Block submit button - validation(s)
+  useEffect(() => {
+    // A product must be selected
+    if(selectedProducts.length < 1)
+      setBlockSubmit(true);
+    else
+      setBlockSubmit(false);
+  }, [newOffer]);
+  
   return(
     <Container className="text-center">
       <Card.Title className="my-4">Add a new offer</Card.Title>
@@ -143,23 +155,30 @@ export default function NewOffer(props) {
           </Col>
         </Row>
       </Card>
+      {blockSubmit 
+        ? <Col>
+            <Button className="mt-3" variant="outline-dark" disabled>
+              Add the offer
+            </Button>
+            <Card.Text className="text-danger mt-2">Select products eligible for the offer before submitting!</Card.Text>
+          </Col>
 
-      <Button
-        className="mt-3"
-        variant="outline-dark"
-        onClick={() => {
-          // Set products
-          setNewOffer({
-            ...newOffer,
-             products: selectedProducts,
-           }); 
-          addToOffers(newOffer, offersList, setOffersList);
-          window.location.reload();
-        }}
-      >
-        Add the offer
-      </Button>
-      
+        : <Button
+            className="mt-3"
+            variant="outline-dark"
+            onClick={() => {
+              // Set products
+              setNewOffer({
+                ...newOffer,
+                products: selectedProducts,
+              }); 
+              addToOffers(newOffer, offersList, setOffersList);
+              window.location.reload();
+            }}
+          >
+            Add the offer
+          </Button>
+      }
     </Container>
   );
 };

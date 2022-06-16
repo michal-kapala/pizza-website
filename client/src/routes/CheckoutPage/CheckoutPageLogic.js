@@ -17,10 +17,9 @@ const usePostToOrders = () => {
         UserDetails: userDetailsStates,
         DeliveryDetails: deliveryDetailsStates,
       });
-      console.log("Inserted data into Orders collection!");
     } catch (err) {
       setAppState("error");
-      console.log(err);
+      console.error(err);
     }
   };
   return { addToOrders };
@@ -35,7 +34,7 @@ const usePostToUsers = () => {
       });
     } catch (err) {
       setAppState("error");
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -58,7 +57,7 @@ const useCheckIfUserInDb = () => {
       });
     } catch (err) {
       setAppState("error");
-      console.log(err);
+      console.error(err);
     }
   };
   return { checkIfUserInDb };
@@ -137,7 +136,7 @@ const useMailjetAPI = (cart) => {
       });
     } catch (err) {
       setAppState("error");
-      console.log(err);
+      console.error(err);
     }
   };
   return { sendEmail };

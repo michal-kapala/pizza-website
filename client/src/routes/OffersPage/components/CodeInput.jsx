@@ -5,7 +5,7 @@ import { OfferItem } from "./OffersList";
 import { useGetSpecialOffer } from "./CodeInputLogic";
 
 export default function CodeInput(props) {
-  const { } = props;
+  const { setContent, setShow } = props;
 
   // Code input state
   const [input, setInput] = useState("");
@@ -49,7 +49,19 @@ export default function CodeInput(props) {
       </Row>
       <Row xs="auto" className="justify-content-center align-items-center mb-3">
         { specialOffer.length > 0
-          ? specialOffer.map((offer) => { return <OfferItem offer={offer}/> })
+          ? specialOffer.map((offer) => { 
+              return (
+                <section
+                  key={offer._id}
+                  onClick={() => {
+                    setShow((currShow) => !currShow);
+                    setContent(offer);
+                  }}
+                >
+                  <OfferItem offer={offer}/>
+                </section>
+              );
+            })
           : <Card.Title className="text-danger">{errorText}</Card.Title>
         }
       </Row>

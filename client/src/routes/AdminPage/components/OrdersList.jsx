@@ -70,6 +70,7 @@ function List(props) {
       <Card.Body>
         <strong>Order details: </strong>
         <ListGroup className="p-2" as="ul">
+          {/*Cart items (products and offers)*/}
           {val.Cart.map((element) => {
             var hasExtras = element.Extras !== undefined;
             return (
@@ -87,7 +88,7 @@ function List(props) {
                   ` (${element.Extras.extra3.quantity}x${element.Extras.extra3.emoji})`
                   : null
                 }
-                {` - ${element.Price.toFixed(2).replace('.',',')} PLN`}  
+                {` - ${(element.Price * element.Quantity).toFixed(2).replace('.',',')} PLN`}  
               </ListGroup.Item>
             );
           })}
