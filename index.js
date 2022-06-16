@@ -1,4 +1,6 @@
 const express = require("express");
+const https = require("https");
+const fs = require("fs");
 const cors = require("cors");
 const app = express();
 
@@ -49,7 +51,13 @@ app.get("*", (req, res) => {
 });
 // **** END Config Deploy ****
 
+// https config
+const options = {
+  key: fs.readFileSync('./key.pem'), // Replace with the path to your key
+  cert: fs.readFileSync('./cert.pem') // Replace with the path to your certificate
+}
+
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+https.createServer(options, app).listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
