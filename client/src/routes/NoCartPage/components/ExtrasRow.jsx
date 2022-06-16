@@ -17,7 +17,6 @@ export default function ExtrasRow(props) {
     // Parent extras object update
     useEffect(() => {
       setExtras(orderExtra, orderExtras, setOrderExtras);
-      console.info(`Extra ${orderExtra.name} update: ${orderExtra.quantity}`);
     }, [orderExtra])
     
 
@@ -36,7 +35,6 @@ export default function ExtrasRow(props) {
               onClick={() => {
                 decrementQuantity(orderExtra, setOrderExtra);
                 if (orderExtra.quantity > 0) {
-                  console.info(`Decremented ${orderExtra.name}: ${orderExtra.quantity}`);
                   setTotalPrice(totalPrice - orderExtra.price);
                 }
               }}
@@ -53,7 +51,6 @@ export default function ExtrasRow(props) {
               onClick={() => {
                 incrementQuantity(orderExtra, setOrderExtra);
                 if (orderExtra.quantity < 3) {
-                  console.info(`Incremented ${orderExtra.name}: ${orderExtra.quantity}`);
                   setTotalPrice(totalPrice + orderExtra.price);
                 }
               }}

@@ -1,6 +1,6 @@
 const ProductsModel = require("../models/Products");
 
-const GetFromProducts = async () => {
+async function GetFromProducts() {
   try {
     const products = await ProductsModel.find({}, (err, result) => {
       return result;
@@ -8,21 +8,28 @@ const GetFromProducts = async () => {
     return products;
   } catch (err) {
     console.log(err);
+    return [];
   }
 };
 
 // Get products from id array
 async function GetFromProductsIds(ids) {
   var products = [];
-  ids.forEach(async (id) => {
-    const product = await ProductsModel.findOne({_id: id}, (err, result) => {
-      return result;
-    });
-    if(product != null)
-      products.push(product);
-  });
-  return products;
-}
+  try {
+    for (let id of ids) {
+      const product = await ProductsModel.findOne({_id: id}, (err, result) => {
+        return result;
+      });
+      if(product != null)
+        products.push(product);
+    }
+    return products;
+  }
+  catch (err) {
+    console.error(err);
+    return products;
+  }
+};
 
 const InsertIntoProducts = async (product) => {
   var extras = [];

@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const { GetOffers, GetOffer, InsertOffer, UpdateOffer, DeleteOffer } = require("../controllers/Offers");
+const { GetOffers, GetOffer, GetRegularOffers, InsertOffer, UpdateOffer, DeleteOffer } = require("../controllers/Offers");
+
+router.get('/regular', GetRegularOffers);
+
+router.get('/:code', GetOffer);
 
 router.get('/', GetOffers);
-
-router.get('/:id', GetOffer);
 
 router.post('/', InsertOffer);
 

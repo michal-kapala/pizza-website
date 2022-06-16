@@ -1,41 +1,68 @@
 const OffersModel = require('../models/Offers');
 const productSvc = require('../service/Products');
 
-// Get all available offers
+// Get all available offers (admin page)
 async function GetOffersSvc() {
   try {
     const offers = await OffersModel.find({}, (err, result) => {
       return result;
     });
-
     // Enrich offers with full product information
     var fullOffers = [];
-    offers.forEach(async (offer) => {
+
+    for (let offer of offers) {
       // Swap the array of ids to an array of objects
       var products = await productSvc.GetFromProductsIds(offer.Products);
-      offer.products = products;
+      offer.Products = products;
       fullOffers.push(offer);
-    });
-
+    }
     return fullOffers;
-  } catch (err) {
+  }
+  catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+// Get from offers by code
+async function GetOfferSvc(code) {
+  try {
+    const offer = await OffersModel.findOne({Code: code}, (err, result) => {
+        return result;
+    });
+    // Swap the array of ids to an array of objects
+    if(offer != null) {
+      var products = await productSvc.GetFromProductsIds(offer.Products);
+      offer.Products = products;
+    }
+    return offer;
+  }
+  catch (err) {
     console.error(err);
   }
 };
 
-// Get from offers by id
-async function GetOfferSvc(id) {
+// Get all nocode offers (offers page)
+async function GetRegularOffersSvc() {
   try {
-    const offer = await OffersModel.find(id, (err, result) => {
-        return result;
+    const offers = await OffersModel.find({Code: 'nocode'}, (err, result) => {
+      return result;
     });
-    // Swap the array of ids to an array of objects
-    var products = await productSvc.GetFromProductsIds(offer.products);
-    offer.products = products;
+    
+    // Enrich offers with full product information
+    var fullOffers = [];
 
-    return offer;
-  } catch (err) {
+    for (let offer of offers) {
+      // Swap the array of ids to an array of objects
+      var products = await productSvc.GetFromProductsIds(offer.Products);
+      offer.Products = products;
+      fullOffers.push(offer);
+    }
+    return fullOffers;
+  }
+  catch (err) {
     console.error(err);
+    return [];
   }
 };
 
@@ -85,4 +112,4 @@ async function DeleteOfferSvc(id) {
   }
 }
 
-module.exports = { GetOffersSvc, GetOfferSvc, InsertOfferSvc, UpdateOfferSvc, DeleteOfferSvc };
+module.exports = { GetOffersSvc, GetOfferSvc, GetRegularOffersSvc, InsertOfferSvc, UpdateOfferSvc, DeleteOfferSvc };

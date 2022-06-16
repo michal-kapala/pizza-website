@@ -4,7 +4,7 @@ import { useState, lazy, Suspense } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 // Logic
-import { useTotalQuantityOrTotalPrice, useProductsList } from "./AppLogic";
+import { useTotalQuantityOrTotalPrice, useProductsList, useOffersList } from "./AppLogic";
 
 import { CircularProgress } from "@material-ui/core";
 import "./App.css";
@@ -24,6 +24,7 @@ const MyAccountPage = lazy(() =>
 );
 const AdminPage = lazy(() => import("./routes/AdminPage/AdminPage"));
 const Whoops404 = lazy(() => import("./routes/Whoops404/Whoops404"));
+const OffersPage = lazy(() => import("./routes/OffersPage/OffersPage"));
 
 export default function App() {
   // State of Application
@@ -52,6 +53,9 @@ export default function App() {
 
   // state to read/get products from MongoDB products collection
   const { productsList } = useProductsList(setAppState);
+
+  // state to read/get products from MongoDB products collection
+  const { offersList } = useOffersList(setAppState);
 
   // **** Custom hook to get: total price and total quantity for CartBar and Cart components from NoCartPage ****
   const { totalQuantity, totalPrice } = useTotalQuantityOrTotalPrice(cart);
@@ -146,6 +150,19 @@ export default function App() {
             {/* AdminPage */}
             <Route exact path="/admin">
               <AdminPage setNoCartAnimation={setNoCartAnimation} />
+            </Route>
+
+            {/* OffersPage */}
+            <Route exact path="/offers">
+              <OffersPage 
+                offers={offersList}
+                cart={cart}
+                setCart={setCart}
+                totalPrice={totalPrice}
+                totalQuantity={totalQuantity}
+                noCartAnimation={noCartAnimation}
+                setCartAnimation={setCartAnimation}
+              />
             </Route>
 
             {/* Redirect to if not a Route path */}

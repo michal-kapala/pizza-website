@@ -21,6 +21,26 @@ const useProductsList = (setAppState) => {
   return { productsList };
 };
 
+// **** State to read/get offers from MongoDB products collection
+const useOffersList = (setAppState) => {
+  const [offersList, setOffersList] = useState([]);
+  useEffect(() => {
+    try {
+      Axios.get(`${process.env.REACT_APP_ENDPOINT}/offers/regular`)
+        .then((response) => {
+          setOffersList(response.data);
+          setAppState("loaded");
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+      setAppState("error");
+    }
+  }, []);
+
+  return { offersList };
+};
+
 const useTotalQuantityOrTotalPrice = (cart) => {
   // Get totalQuantity from cart state
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -80,4 +100,4 @@ const useDate = (id) => {
   return { minsDiff };
 };
 
-export { useProductsList, useTotalQuantityOrTotalPrice, useDate };
+export { useProductsList, useOffersList, useTotalQuantityOrTotalPrice, useDate };

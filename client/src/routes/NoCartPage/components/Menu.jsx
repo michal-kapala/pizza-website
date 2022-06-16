@@ -6,7 +6,9 @@ import {
   Form,
   FormControl,
   Image,
+  Button
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import Brand from "./../../../shared components/Brand";
 
@@ -62,7 +64,13 @@ export default function Menu(props) {
               <Nav className="rajdhani">
                 <Nav.Link href="#drinks">Drinks</Nav.Link>
               </Nav>
+              <Link to="/offers">
+                <Button className="mx-5" variant="dark" type="button">
+                  🔥 Offers
+                </Button>
+              </Link>
             </Navbar.Collapse>
+            
           </Container>
         </Navbar>
       </Container>
