@@ -17,7 +17,7 @@ The front-end is in the 'client' folder from the root directory.
 - [Mailjet](https://www.mailjet.com/) for Sending Email
 
 ## Features
-
+### Original
 - Admins manage and control the Products Collection
 - Product search feature
 - Shopping Cart
@@ -26,6 +26,12 @@ The front-end is in the 'client' folder from the root directory.
 - History of orders
 - Status of Order
 - Email order to the restaurant
+
+### Added in this fork
+- special offers
+- product extras
+- orders and offers mangement via admin panel
+- https configuration (see `https` branch)
 
 ## Prerequisite
 
